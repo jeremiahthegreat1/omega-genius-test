@@ -10,6 +10,12 @@ function startClear () {
     quest1();
 }
 
+function nextQuestion () {
+    document.querySelector("ol").remove();
+    document.querySelector("li").remove();
+    document.querySelector("h1").remove();
+}
+
 function startPage() {
     timerEl.textContent = "Time: 0";
     var header = document.createElement("h1");
@@ -42,6 +48,7 @@ function quest1 () {
     multiChoiceBin.appendChild(multiChoice2);
     var multiChoice3 = document.createElement("li");
     multiChoice3.textContent = "alerts";
+    multiChoice3.setAttribute("class", "correct");
     multiChoiceBin.appendChild(multiChoice3);
     var multiChoice4 = document.createElement("li");
     multiChoice4.textContent = "numbers";
@@ -61,6 +68,7 @@ function quest2 () {
     multiChoiceBin.appendChild(multiChoice2);
     var multiChoice3 = document.createElement("li");
     multiChoice3.textContent = "parenthesis";
+    multiChoice3.setAttribute("class", "correct");
     multiChoiceBin.appendChild(multiChoice3);
     var multiChoice4 = document.createElement("li");
     multiChoice4.textContent = "square brackets";
@@ -83,6 +91,7 @@ function quest3 () {
     multiChoiceBin.appendChild(multiChoice3);
     var multiChoice4 = document.createElement("li");
     multiChoice4.textContent = "all of the above";
+    multiChoice4.setAttribute("class", "correct");
     multiChoiceBin.appendChild(multiChoice4);
 }
 function quest4 () {
@@ -99,6 +108,7 @@ function quest4 () {
     multiChoiceBin.appendChild(multiChoice2);
     var multiChoice3 = document.createElement("li");
     multiChoice3.textContent = "quotes";
+    multiChoice3.setAttribute("class", "correct");
     multiChoiceBin.appendChild(multiChoice3);
     var multiChoice4 = document.createElement("li");
     multiChoice4.textContent = "parenthesis";
@@ -121,9 +131,21 @@ function quest5 () {
     multiChoiceBin.appendChild(multiChoice3);
     var multiChoice4 = document.createElement("li");
     multiChoice4.textContent = "console.log";
+    multiChoice4.setAttribute("class", "correct");
     multiChoiceBin.appendChild(multiChoice4);
 }
-
+//Added function for final page, remember to define userScore and store it in local storage
+function finalPage () {
+    var header = document.createElement("h1");
+    header.textContent = "All done!"
+    startScreenDiv.appendChild(header);
+    var finalScore = document.createElement("p");
+    finalScore.textContent = "Your final score is " + userScore + ".";
+    startScreenDiv.appendChild(finalScore);
+    var leaderboardUser = document.createElement("input");
+    leaderboardUser.setAttribute("label", "Enter initials: ");
+    startScreenDiv.appendChild(leaderboardUser);
+}
 //Adding stored value for penalty and starting timer value
 var startValue = 0;
 var penalty = 10;
