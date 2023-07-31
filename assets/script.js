@@ -2,6 +2,50 @@
 var timerEl = document.querySelector(".time");
 var startScreenDiv = document.querySelector(".main");
 var countC = localStorage.getItem("count");
+var header = document.createElement("h1");
+var finalScore = document.createElement("p");
+var userScore = localStorage.getItem("count");
+var label = document.createElement("p");
+var leaderboardUser = document.createElement("input");
+var submitUser = document.createElement("button");
+
+//Trying to fix null issue when allowing timer to hit zero on question 1
+//function getZero () {
+//    if (userScore === null) {
+//        $userScore = $userScore() || 0;
+//    }
+//}
+//Inspired by activity 24
+function subUser () {
+    submitUser.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        var lbUser = {
+            userentry: leaderboardUser.value.trim()
+        }
+        localStorage.setItem("userentry", JSON.stringify(lbUser));
+    })}
+
+function finalPage () {
+//    getZero();
+    var header = document.createElement("h1");
+    header.textContent = "All done!"
+    startScreenDiv.appendChild(header);
+    var finalScore = document.createElement("p");
+    var userScore = localStorage.getItem("count");
+    finalScore.textContent = "Your final score is " + userScore + " out of 5.";
+    startScreenDiv.appendChild(finalScore);
+    var label = document.createElement("p");
+    label.textContent = "Enter initials: ";
+    startScreenDiv.appendChild(label);
+    var leaderboardUser = document.createElement("input");
+    leaderboardUser.setAttribute("label", "Enter initials: ");
+    startScreenDiv.appendChild(leaderboardUser);
+    var submitUser = document.createElement("button");
+    submitUser.textContent = "Submit";
+    startScreenDiv.appendChild(submitUser);
+    subUser();
+}
 
 function countCorrAdd () {
     if (countC < 5) {
@@ -375,11 +419,6 @@ function quest5 () {
 }
 //Added function for final page, remember to define userScore and store it in local storage
 
-//Clear count in localstorage for another attempt
-function tryAgain () {
-    localStorage.clear();
-}
-
 //Adding stored value for penalty and starting timer value
 var startValue = 0;
 var penalty = 10;
@@ -387,7 +426,6 @@ var secondsLeft = 75;
 
 //From module 4 activity 9
 function setTime() {
-    //Add else if to account for button press to change timer from 0
     // Sets interval in variable
     var timerInterval = setInterval(function() {
       secondsLeft--;
@@ -397,8 +435,18 @@ function setTime() {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
         // Calls function to ***Fill this in***
-        sendMessage();
+        nextQuestion();
+        finalPage();
+//        getZero();
       }
   
     }, 1000);
+    function nextQuestion () {
+        var disappearQ = document.getElementById("q");
+        disappearQ.remove();
+        document.getElementById("ql1").remove();
+        document.getElementById("ql2").remove();
+        document.getElementById("ql3").remove();
+        document.getElementById("ql4").remove();
+    }
   }
