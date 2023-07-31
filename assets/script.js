@@ -9,6 +9,38 @@ var label = document.createElement("p");
 var leaderboardUser = document.createElement("input");
 var submitUser = document.createElement("button");
 
+//Adding stored value for penalty and starting timer value
+var startValue = 0;
+var penalty = 10;
+var secondsLeft = 75;
+var timerInterval = setInterval
+
+//From module 4 activity 9
+function setTime() {
+    // Sets interval in variable
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timerEl.textContent = "Time: " + secondsLeft;
+  
+      if(secondsLeft === 0) {
+        // Stops execution of action at set interval
+        clearInterval(timerInterval);
+        nextQuestion();
+        finalPage();
+//        getZero();
+      } 
+  
+    }, 1000);
+    function nextQuestion () {
+        var disappearQ = document.getElementById("q");
+        disappearQ.remove();
+        document.getElementById("ql1").remove();
+        document.getElementById("ql2").remove();
+        document.getElementById("ql3").remove();
+        document.getElementById("ql4").remove();
+    }
+  }
+
 //Trying to fix null issue when allowing timer to hit zero on question 1
 //function getZero () {
 //    if (userScore === null) {
@@ -35,11 +67,8 @@ function finalPage () {
     var userScore = localStorage.getItem("count");
     finalScore.textContent = "Your final score is " + userScore + " out of 5.";
     startScreenDiv.appendChild(finalScore);
-    var label = document.createElement("p");
-    label.textContent = "Enter initials: ";
-    startScreenDiv.appendChild(label);
     var leaderboardUser = document.createElement("input");
-    leaderboardUser.setAttribute("label", "Enter initials: ");
+    leaderboardUser.setAttribute("placeholder", "Enter initials: ");
     startScreenDiv.appendChild(leaderboardUser);
     var submitUser = document.createElement("button");
     submitUser.textContent = "Submit";
@@ -72,6 +101,7 @@ function ohNo () {
 function startPage() {
     timerEl.textContent = "Time: 0";
     var header = document.createElement("h1");
+    header.setAttribute("class", "header");
     header.textContent = "Coding Quiz Challenge";
     startScreenDiv.appendChild(header);
     var explanation = document.createElement("p");
@@ -80,6 +110,7 @@ function startPage() {
     var startButton = document.createElement("button");
     startButton.textContent = "Start Quiz";
     startButton.setAttribute("id", "startbutton");
+    startButton.setAttribute("class", "$indigo-400")
     startScreenDiv.appendChild(startButton);
     //Inspired by https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_addeventlistener2
     var myBtn = document.getElementById("startbutton");
@@ -370,11 +401,8 @@ function quest5 () {
         var userScore = localStorage.getItem("count");
         finalScore.textContent = "Your final score is " + userScore + " out of 5.";
         startScreenDiv.appendChild(finalScore);
-        var label = document.createElement("p");
-        label.textContent = "Enter initials: ";
-        startScreenDiv.appendChild(label);
         var leaderboardUser = document.createElement("input");
-        leaderboardUser.setAttribute("label", "Enter initials: ");
+        leaderboardUser.setAttribute("placeholder", "Enter initials: ");
         startScreenDiv.appendChild(leaderboardUser);
         var submitUser = document.createElement("button");
         submitUser.textContent = "Submit";
@@ -387,7 +415,8 @@ function quest5 () {
             event.preventDefault();
 
             var lbUser = {
-                userentry: leaderboardUser.value.trim()
+                userentry: leaderboardUser.value.trim(),
+                score: userScore
             }
             localStorage.setItem("userentry", JSON.stringify(lbUser));
         })}
@@ -404,6 +433,7 @@ function quest5 () {
             countCorrAdd();   
             nextQuestion();
             finalPage();
+            clearInterval(timerInterval);
         } else {
             var result = document.createElement("h1");
             result.setAttribute("id", "result");
@@ -412,41 +442,11 @@ function quest5 () {
             ohNo();
             nextQuestion();
             finalPage();
+            clearInterval(timerInterval);
         }
     })}
     
     answered();
 }
-//Added function for final page, remember to define userScore and store it in local storage
+//Added function for final page
 
-//Adding stored value for penalty and starting timer value
-var startValue = 0;
-var penalty = 10;
-var secondsLeft = 75;
-
-//From module 4 activity 9
-function setTime() {
-    // Sets interval in variable
-    var timerInterval = setInterval(function() {
-      secondsLeft--;
-      timerEl.textContent = "Time: " + secondsLeft;
-  
-      if(secondsLeft === 0) {
-        // Stops execution of action at set interval
-        clearInterval(timerInterval);
-        // Calls function to ***Fill this in***
-        nextQuestion();
-        finalPage();
-//        getZero();
-      }
-  
-    }, 1000);
-    function nextQuestion () {
-        var disappearQ = document.getElementById("q");
-        disappearQ.remove();
-        document.getElementById("ql1").remove();
-        document.getElementById("ql2").remove();
-        document.getElementById("ql3").remove();
-        document.getElementById("ql4").remove();
-    }
-  }
