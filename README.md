@@ -17,7 +17,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
-Credit to lessons from UNH Coding Bootcamp modules. I was also inspired by code at https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_addeventlistener2 that assisted me with added event listeners.
+Credit to lessons from UNH Coding Bootcamp modules.  The js file includes notation where activity's from class assisted with completing the task. I was also inspired by code at https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_addeventlistener2 that assisted me with added event listeners.
 
 ## License
 
